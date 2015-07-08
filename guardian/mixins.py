@@ -213,3 +213,6 @@ class GuardianUserMixin(object):
 
     def del_obj_perm(self, perm, obj):
         return UserObjectPermission.objects.remove_perm(perm, self, obj)
+
+    def is_anonymous(self):
+        return self == self.get_anonymous()

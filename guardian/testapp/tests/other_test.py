@@ -299,3 +299,11 @@ class TestMonkeyPatch(TestCase):
         self.assertTrue(getattr(CustomUserTestClass, 'get_anonymous', False))
         self.assertTrue(getattr(CustomUserTestClass, 'add_obj_perm', False))
         self.assertTrue(getattr(CustomUserTestClass, 'del_obj_perm', False))
+
+        anon = CustomUserTestClass()
+        non_anon = CustomUserTestClass()
+        # patch get_anonymous to point to anon
+        CustomUserTestClass.get_anonymous = mock.Mock()
+        CustomUserTestClass.get_anonymous.return_value = anon
+        self.assertTrue(anon.is_anonymous())
+        self.assertFalse(non_anon.is_anonymous())

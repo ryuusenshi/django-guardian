@@ -25,8 +25,11 @@ User = get_user_model()
 class GetAnonymousUserTest(TestCase):
 
     def test(self):
+        non_anon = User()
         anon = get_anonymous_user()
         self.assertTrue(isinstance(anon, User))
+        self.assertTrue(anon.is_anonymous())
+        self.assertFalse(non_anon.is_anonymous())
 
 class GetIdentityTest(ObjectPermissionTestCase):
 

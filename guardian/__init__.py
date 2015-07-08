@@ -28,4 +28,4 @@ def monkey_patch_user():
         lambda self, perm, obj: UserObjectPermission.objects.assign_perm(perm, self, obj))
     setattr(User, 'del_obj_perm',
         lambda self, perm, obj: UserObjectPermission.objects.remove_perm(perm, self, obj))
-
+    setattr(User, 'is_anonymous', lambda self: self==self.get_anonymous())

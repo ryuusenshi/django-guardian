@@ -69,5 +69,5 @@ class NonIntPKModel(models.Model):
 
 if django.VERSION > (1, 5):
     from django.contrib.auth.models import AbstractUser
-    class CustomUser(AbstractUser, GuardianUserMixin):
+    class CustomUser(GuardianUserMixin, AbstractUser):
         custom_id = models.AutoField(primary_key=True)
